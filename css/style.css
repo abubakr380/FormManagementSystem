@@ -1,0 +1,91 @@
+/*** Global Styles START ***/
+body {
+    font-size: 16px;
+    font-family: 'Comfortaa', cursive;
+    color: #414141;
+}
+/*** Global Styles END ***/
+
+/*** Navbar Styles START ***/
+nav.navbar {
+    border: 0;
+}
+
+nav#main-nav {
+    margin-bottom: 0;
+    color: #ffffff;
+}
+
+nav > div {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+#main-nav div.container-fluid {
+    background-color: #00a0a0;
+}
+#main-nav div.container-fluid a {
+    color: #fff;
+}
+
+nav .navbar-header {
+    margin-top: 10px;
+}
+
+nav li:hover {
+    background-color: #fdfff0;
+    border-radius: 5px;
+}
+
+nav li a {
+    border-radius: 5px;
+}
+
+nav li a:hover {
+    color: #008080 !important;
+}
+
+nav li.active a {
+    color: #008080 !important;
+    background: #fdfff0 !important;
+}
+/*** Navbar Styles END ***/
+
+/*** Main Content Styles START ***/
+.main-body-content {
+    padding-top: 115px;
+    padding-bottom: 30px;
+    background-color: #fdfff0;
+    color: #414141;
+}
+
+.main-body-content .page-headline {
+    text-shadow: 2px 2px #b8baab;
+}
+/*** Main Content Styles END ***/
+
+/*** Footer Styles START ***/
+footer {
+    background-color: #008080;
+    color: #fff;
+}
+
+footer > div.container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+/*** Footer Styles END ***/
+
+/*** Form Management Page START ***/
+#add-field {
+    font-size: 0.7em;
+    margin-left: 20px;
+}
+/*** Form Management Page END ***/
+
+/*** Form Display Page START ***/
+#about-form {
+    margin-bottom: 20px;
+}
+/*** Form Display Page END ***/
+

@@ -1,0 +1,18 @@
+<div ng-init="init()">
+    <div id="about-form">
+        <h3>{{Form.name}}</h3>
+        <p>{{Form.description}}</p>
+    </div>
+    <form name="FormName">
+        <div class="form-body">
+            <div class="form-group input-group col-md-12" ng-repeat="field in Form.fields">
+                <label class="col-sm-3">{{field.name}}:</label>
+                <div class="col-md-8">
+                    <input type="{{field.dataType}}" class="form-control" ng-Model="field.name" name="{{field.name}}" ng-required="field.required">
+                </div>
+            </div>
+        </div>
+        <input type="submit" class="btn btn-success" value="Save" ng-click="SaveForm()" />
+        <input type="button" class="btn btn-warning" data-dismiss="modal" value="Cancel" />
+    </form>
+</div>

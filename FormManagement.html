@@ -1,0 +1,99 @@
+
+<div ng-init="init()">
+    <button class="btn btn-primary" ng-click="SetCurrentForm()" data-toggle="modal" data-target="#formModal">Create New Form</button>
+    <div id="formModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <create-new-form></create-new-form>
+                </div>
+                <form name="FormName">
+                    <div class="modal-body">
+                        <div class="form-body">
+                            <div class="form-group input-group col-md-12">
+                                <label for="name" class="col-sm-3">Name:</label>
+                                <div class="col-md-8">
+                                    <input type="text" id="name" class="form-control" ng-Model="CurrentForm.name" name="Name" required autofocus>
+                                </div>
+                            </div>
+                            <div class="form-group input-group col-md-12">
+                                <label for="name" class="col-sm-3">Description:</label>
+                                <div class="col-md-8">
+                                    <input type="text" id="description" class="form-control" ng-Model="CurrentForm.description" name="Description" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group input-group col-md-12">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Data Type</th>
+                                            <th>Required</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="field in CurrentForm.fields">
+                                            <td>
+                                                <input type="text" class="form-control" ng-Model="field.name" placeholder="name..." required>
+                                            </td>
+                                            <td>
+                                                <select class="form-control" ng-Model="field.dataType" ng-options="dt.value as dt.key for dt in DataTypes" required></select>
+                                            </td>
+                                            <td>
+                                                <input type="checkbox" class="form-control" ng-Model="field.required" value="true">
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-success" ng-click="AddField($index)">
+                                                    <i class="glyphicon glyphicon-plus"></i>
+                                                </button>
+                                                <button class="btn btn-danger" ng-click="DeleteField($index)">
+                                                    <i class="glyphicon glyphicon-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-success" value="Save" ng-click="SaveForm(FormName.$valid)" />
+                        <input type="button" class="btn btn-warning" data-dismiss="modal" value="Cancel" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>CreatedAt</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="form in Forms track by $index">
+                <td>{{form.name}}</td>
+                <td>{{form.description}}</td>
+                <td>{{form.createdAt}}</td>
+                <td>
+                    <button class="btn btn-info" ng-click="DisplayForm($index)">
+                        Display Form
+                    </button>
+                    <button class="btn btn-success" ng-click="SetCurrentForm(form)" data-toggle="modal" data-target="#formModal">
+                        <i class="glyphicon glyphicon-edit"></i>
+                    </button>
+                    <button class="btn btn-danger" ng-click="DeleteForm($index)">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
