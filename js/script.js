@@ -18,7 +18,7 @@ FormApp.directive("createNewForm", function() {
     };
 });
 
-FormApp.controller("FormManagementController", function($scope) {
+FormApp.controller("FormManagementController", function ($scope) {
     $scope.Forms = [];
     $scope.CurrentForm = {};
     $scope.ShowError = false;
@@ -33,8 +33,9 @@ FormApp.controller("FormManagementController", function($scope) {
         localStorage.setItem(key, JSON.stringify(value));
     }
 
-    $scope.init = function() {
-        $scope.Forms = JSON.parse(localStorage.getItem("Forms"));
+    $scope.init = function () {
+        var data = localStorage.getItem("Forms");
+        $scope.Forms = data ? JSON.parse(data) : new Array(0);
     };
 
     $scope.SetCurrentForm = function(form) {
@@ -55,21 +56,25 @@ FormApp.controller("FormManagementController", function($scope) {
         window.location = "#!forms/" + $scope.Forms[index].name;
     };
 
-    $scope.SaveForm = function(IsValid) {
-        if(!IsValid)
+    $scope.SaveForm = function (IsValid) {
+        if (!IsValid) {
             $scope.ShowError = true;
-        else if($scope.IsNew) {
-            $scope.CurrentForm.createdAt = new Date();
-            $scope.Forms[$scope.Forms.length] = $scope.CurrentForm;
         }
         else {
-            for(i=0; i<$scope.Forms.length && $scope.Forms[i].name==$scope.CurrentForm.name; i++) {
-                $scope.Forms[i] = $scope.CurrentForm;
+            if ($scope.IsNew) {
+                $scope.CurrentForm.createdAt = new Date();
+                $scope.Forms.push($scope.CurrentForm);
             }
-        }
+            else {
+                for (i = 0; i < $scope.Forms.length && $scope.Forms[i].name === $scope.CurrentForm.name; i++) {
+                    $scope.Forms[i] = $scope.CurrentForm;
+                    break;
+                }
+            }
 
-        updateLocalStorage("Forms", $scope.Forms);
-        $('#formModal').modal('hide');
+            $('#formModal').modal('hide');
+            updateLocalStorage("Forms", $scope.Forms);
+        }
     };
 
     $scope.AddField = function(index) {
@@ -78,8 +83,8 @@ FormApp.controller("FormManagementController", function($scope) {
 
     $scope.DeleteField = function(index) {
         $scope.CurrentForm.fields.splice(index, 1);
-        if($scope.CurrentForm.fields.length == 0)
-            $scope.CurrentForm.fields[0] = {}
+        if ($scope.CurrentForm.fields.length === 0)
+            $scope.CurrentForm.fields[0] = {};
     };
 
     $scope.DeleteForm = function(index) {
@@ -91,11 +96,8 @@ FormApp.controller("FormManagementController", function($scope) {
 FormApp.controller("FormDisplayController", function($scope) {
     $scope.Form = {};
 
-    $scope.init = function() {
-        if(localStorage.index)
-            var index = parseInt(localStorage.index);
-        else
-            var index = 0;
+    $scope.init = function() {   
+        var index = localStorage.index ? localStorage.index : 0;
 
         $scope.Form = JSON.parse(localStorage.getItem("Forms"))[index];
     };
