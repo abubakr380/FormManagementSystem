@@ -34,8 +34,8 @@ FormApp.controller("FormManagementController", function ($scope) {
     }
 
     $scope.init = function () {
-        var data = localStorage.getItem("Forms");
-        $scope.Forms = data ? JSON.parse(data) : new Array(0);
+        var data = JSON.parse(localStorage.getItem("Forms"));
+        $scope.Forms = data ? data : [];
     };
 
     $scope.SetCurrentForm = function(form) {

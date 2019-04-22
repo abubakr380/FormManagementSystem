@@ -28,6 +28,10 @@ nav > div {
     color: #fff;
 }
 
+#main-nav a {
+    cursor: pointer;
+}
+
 nav .navbar-header {
     margin-top: 10px;
 }
